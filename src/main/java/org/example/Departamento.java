@@ -12,10 +12,19 @@ public class Departamento {
         this.nombre = nombre;
     }
 
-   
+    public void agregarEmpleado(Empleado empleado) {
+        empleados.add(empleado);
+    }
+
+    public int obtenerNumeroEmpleados() {
+        return empleados.size();
+    }
 
 
-
+    @Override
+    public String toString() {
+        return " TECH" ;
+    }
 
 
 }
