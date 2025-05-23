@@ -27,6 +27,9 @@ public class Empleado {
     public Departamento getDepartamento() {
         return departamento;
     }
+    public Instant horaLlegada() {
+        return horaLlegada;
+    }
 
     @Override
     public String toString() {

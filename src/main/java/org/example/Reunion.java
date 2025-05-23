@@ -7,8 +7,10 @@ import java.util.List;
 
 public class Reunion{
 
-        int Tipo;
-        protected String Tipo1;
+        protected int Tipo;
+        protected int formato;
+        protected String Tipo2;
+        protected String formato2;
         protected Instant fechaHora;
         protected Instant fechaHoraAtrasos;
         protected Duration duracionPrevista;
@@ -25,20 +27,26 @@ public class Reunion{
 
 
 
-        public Reunion(Instant fechaHora, Duration duracionPrevista,Empleado organizador,int Tipo) {
+        public Reunion(Instant fechaHora, Duration duracionPrevista,Empleado organizador,int Tipo,int formato) {
                 this.fechaHora = fechaHora;
                 this.duracionPrevista = duracionPrevista;
                 this.organizador = organizador;
                 this.Tipo=Tipo;
-                this.Tipo1=Tipo1;
+                this.Tipo2=Tipo2;
+                this.formato=formato;
+                this.formato2=formato2;
 
-                if(Tipo==1){String Tipo1="Tecnologico";}
-                if(Tipo==2){String Tipo1="Marketing";}
-                if(Tipo==3){String Tipo1="Otro";}
+                if(Tipo==1){ Tipo2="Tecnologico";}
+                if(Tipo==2){ Tipo2="Marketing";}
+                if(Tipo==3){ Tipo2="Otro";}
+
+                if(formato==1){ formato2="precencial";}
+                if(formato==1){ formato2="online";}
 
 
 
         }
+
 
         public void agregarInvitado(Empleado empleado) {
                 invitados.add(empleado);
@@ -53,8 +61,8 @@ public class Reunion{
         }
 
         public void registrarAtraso(Empleado empleado, Instant fechaHoraAtrasos){
-                presentes.add(empleado);
-                atrasados.add(empleado);
+                if(empleado.horaLlegada().isAfter(Instant.now()))
+                        atrasados.add(empleado);
 
         }
         public void agregarDepartamento(Departamento departamento) {
@@ -89,33 +97,65 @@ public class Reunion{
 
                 float lol= presentes.size();
                 float lol2= invitados.size();
-                float lol3=lol/lol2;
+                float lol3=(lol/lol2)*100;
                 String porcentajeAsistencia="pocentaje de la asistencia: "+lol3;
 
                 return porcentajeAsistencia;
 
         }
 
-        public void crearListaAsistentes(){
+        public boolean crearListaAsistentes(){
 
 
                         System.out.println(presentes);
 
+                return false;
         }
+        public boolean crearListaAusentes(){
+
+
+                System.out.println(ausentes);
+
+                return false;
+        }
+        public boolean crearListainvitados(){
+
+
+                System.out.println(invitados);
+
+                return false;
+
+        }
+
 
         public void ComenzarReunion()
         {
 
-                System.out.println("parametros de la reunion:");
+                System.out.println("parametros de la reunion: "+ this);
+
+
+
 
 
 
         }
         public void finalizarReunion() {
 
+                crearListaAsistentes();
+                calcularAsistencia();
+                System.out.println(calcularAsistencia());
+
+                System.out.println(calcularAsistencia2());
+                calcularAsistencia2();
                 System.out.println("se acabo la reunion:");
+                registarAusencias();
+                crearListaAusentes();
+
         }
 
-
+        @Override
+        public String toString() {
+                return  "Tipo: " + Tipo2 + ", Fecha: " + fechaHora + " duracion prevista: " + duracionPrevista + " organizador: " + organizador +" fomarto: " + formato2;
+        }
 }
 

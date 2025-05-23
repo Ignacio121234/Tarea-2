@@ -26,24 +26,28 @@ public class Main {
 
         PersonaExterna p1 =new PersonaExterna("ignacio externo","ignacioex@gmail.com",ahora);
 
-        Reunion reunion = new Reunion(Instant.now(), Duration.ofHours(2), t1,2) {};
+        Reunion reunion = new Reunion(Instant.now(), Duration.ofHours(2), t2,2,1) {};
         reunion.agregarDepartamento(tech);
 
 
 
-        reunion.agregarInvitadoEx(p1);
-        reunion.registrarAsistencia(t1,ahora);
-        reunion.registrarAsistencia(t2,ahora);
-        reunion.agregarInvitado(m1);
-        reunion.registrarAsistencia(m1,ahora);
-        reunion.agregarInvitado(m2);
 
-        reunion.registarAusencias();
-        System.out.println(reunion.calcularAsistencia());
-        System.out.println(reunion.calcularAsistencia2());
+
+        reunion.registrarAsistencia(t1,ahora.plus(Duration.ofHours(2)));
 
 
 
-        reunion.crearListaAsistentes();
+
+
+
+
+
+        reunion.ComenzarReunion();
+        reunion.crearListainvitados();
+
+
+        reunion.finalizarReunion();
+
+
     }
 }
