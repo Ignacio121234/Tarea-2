@@ -41,7 +41,7 @@ public class Reunion{
                 if(Tipo==3){ Tipo2="Otro";}
 
                 if(formato==1){ formato2="precencial";}
-                if(formato==1){ formato2="online";}
+                if(formato==2){ formato2="online";}
 
 
 
@@ -87,7 +87,7 @@ public class Reunion{
         public String calcularAsistencia(){
 
                 float lol= presentes.size();
-                String Asistencia="Asistencia: "+lol;
+                String Asistencia="Asistencia: "+lol+" personas";
 
                 return Asistencia;
 
@@ -98,7 +98,7 @@ public class Reunion{
                 float lol= presentes.size();
                 float lol2= invitados.size();
                 float lol3=(lol/lol2)*100;
-                String porcentajeAsistencia="pocentaje de la asistencia: "+lol3;
+                String porcentajeAsistencia="pocentaje de la asistencia: "+lol3+"%";
 
                 return porcentajeAsistencia;
 
@@ -106,25 +106,30 @@ public class Reunion{
 
         public boolean crearListaAsistentes(){
 
-
+                        System.out.print("lista asistentes: ");
                         System.out.println(presentes);
 
                 return false;
         }
         public boolean crearListaAusentes(){
 
-
+                System.out.print("lista ausentes: ");
                 System.out.println(ausentes);
 
                 return false;
         }
         public boolean crearListainvitados(){
 
-
+                System.out.print("lista invitados: ");
                 System.out.println(invitados);
 
                 return false;
 
+        }
+        public String crearNota(){
+
+                String Nota="ESTOS SON LOS APUNTES DE LA REUNION";
+                return Nota;
         }
 
 
@@ -132,6 +137,12 @@ public class Reunion{
         {
 
                 System.out.println("parametros de la reunion: "+ this);
+                if(formato2.equals("online")){
+                        System.out.println("Enlace: reunion.com/reu");
+                }
+                if(formato2.equals("precencial")){
+                        System.out.println("Ubicacion: sala 3");
+                }
 
 
 
