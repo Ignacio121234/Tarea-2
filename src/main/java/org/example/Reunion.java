@@ -62,7 +62,7 @@ public class Reunion{
                 while (i < departamento.getEmpleados().size()) {
                         if (departamento.getEmpleados().get(i).getDepartamento().toString().equals("Tecnologia")) {
 
-                                System.out.println("works");
+                                invitados.add(departamento.getEmpleados().get(i));
                                 i = i + 1;
                         }
                 }
