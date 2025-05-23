@@ -1,5 +1,6 @@
 package org.example;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,15 +17,22 @@ public class Departamento {
         empleados.add(empleado);
     }
 
+    public List<Empleado> getEmpleados() {
+        return empleados;
+    }
+
     public int obtenerNumeroEmpleados() {
         return empleados.size();
     }
 
 
+
+
     @Override
     public String toString() {
-        return " TECH" ;
+        return nombre ;
     }
+
 
 
 }
