@@ -7,39 +7,48 @@ import java.util.List;
 
 public class Reunion{
 
-        protected int Tipo;
-        protected int formato;
-        protected String Tipo2;
-        protected String formato2;
-        protected Instant fechaHora;
-        protected Instant fechaHoraAtrasos;
-        protected Duration duracionPrevista;
-        protected Empleado organizador;
-        protected List<Empleado> invitados = new ArrayList<>();
-        protected List<PersonaExterna> invitadosEx = new ArrayList<>();
-        protected List<Empleado> atrasados = new ArrayList<>();
-        protected List<Empleado> presentes = new ArrayList<>();
-        protected List<Empleado> ausentes = new ArrayList<>();
+
+        //declaracion de variables en reunion
+        protected int Tipo;//indica el tipo de reunion
+        protected int formato;//indica si el formato es online o precencial
+        protected String Tipo2;//indica el tipo de reunion pero es una string
+        protected String formato2;//indica si el formato es online o precencial pero es una string
+        protected Instant fechaHora;//indica el momento de la reunion
+        protected Duration duracionPrevista;//indica cuanto se espera que dure la reunion
+        protected Empleado organizador;//define que empleado organiza la reunion
+        protected List<Empleado> invitados = new ArrayList<>();//lista de invitados
+        protected List<PersonaExterna> invitadosEx = new ArrayList<>();//lista de invitados externos
+        protected List<Empleado> atrasados = new ArrayList<>();//lsita de empleados atrasados
+        protected List<Empleado> presentes = new ArrayList<>();//lista de empleados que asisten a la reunion
+        protected List<Empleado> ausentes = new ArrayList<>();//lista de empleados que se ausentan a la reunion
 
 
 
 
 
-
+        //constructor de la clase Reunion
 
         public Reunion(Instant fechaHora, Duration duracionPrevista,Empleado organizador,int Tipo,int formato) {
-                this.fechaHora = fechaHora;
-                this.duracionPrevista = duracionPrevista;
-                this.organizador = organizador;
-                this.Tipo=Tipo;
-                this.Tipo2=Tipo2;
-                this.formato=formato;
-                this.formato2=formato2;
 
+
+                //variables de parametros de la reunion
+                this.fechaHora = fechaHora;//indica el momento de la reunion
+                this.duracionPrevista = duracionPrevista;//indica cuanto se espera que dure
+                this.organizador = organizador;//define que empleado organiza la reunion
+                this.Tipo=Tipo;//indica el tipo de reunion
+                this.Tipo2=Tipo2;//indica el tipo de reunion pero es una string
+                this.formato=formato;//indica si el formato es online o precencial
+                this.formato2=formato2;//indica si el formato es online o precencial pero es una string
+
+
+
+                //se define el Tipo de reunion
                 if(Tipo==1){ Tipo2="Tecnologico";}
                 if(Tipo==2){ Tipo2="Marketing";}
                 if(Tipo==3){ Tipo2="Otro";}
 
+
+                //se define el formato de reunion
                 if(formato==1){ formato2="precencial";}
                 if(formato==2){ formato2="online";}
 
@@ -48,23 +57,28 @@ public class Reunion{
         }
 
 
+        //metodo que invita empleado de manera individual
         public void agregarInvitado(Empleado empleado) {
                 invitados.add(empleado);
 
         }
+        //metodo que agrega invitados externos
         public void agregarInvitadoEx(PersonaExterna personaExterna) {
                 invitadosEx.add(personaExterna);
 
         }
+        //metodo que registra la asistencia a la reunion
         public void registrarAsistencia(Empleado empleado,Instant fechaHora) {
-                presentes.add(empleado);
+                presentes.add(empleado);//se agregan empleados a la lista presentes
         }
 
+        //metodo que registra los atrasos de los empleados(no implementado)
         public void registrarAtraso(Empleado empleado, Instant fechaHoraAtrasos){
                 if(empleado.horaLlegada().isAfter(Instant.now()))
                         atrasados.add(empleado);
 
         }
+        //metodo que invita un departamento completo
         public void agregarDepartamento(Departamento departamento) {
                 int i = 0;
                 while (i < departamento.getEmpleados().size()) {
@@ -75,8 +89,9 @@ public class Reunion{
                         }
                 }
         }
+        //metodo que registra las ausencias
         public void registarAusencias(){
-                ausentes = new ArrayList<>(invitados); // Create a copy
+                ausentes = new ArrayList<>(invitados);
                 ausentes.removeAll(presentes);
 
 
@@ -84,6 +99,7 @@ public class Reunion{
 
 
         }
+        //indica cuantas personas asisten
         public String calcularAsistencia(){
 
                 float lol= presentes.size();
@@ -92,7 +108,7 @@ public class Reunion{
                 return Asistencia;
 
         }
-
+        //metodo que indica el porcentaje de asistencia
         public String calcularAsistencia2(){
 
                 float lol= presentes.size();
@@ -103,7 +119,7 @@ public class Reunion{
                 return porcentajeAsistencia;
 
         }
-
+        //metodo que crea un lista de la gente que asiste
         public boolean crearListaAsistentes(){
 
                         System.out.print("lista asistentes: ");
@@ -111,6 +127,7 @@ public class Reunion{
 
                 return false;
         }
+        //metodo que crea una lista de la que se ausenta
         public boolean crearListaAusentes(){
 
                 System.out.print("lista ausentes: ");
@@ -118,6 +135,7 @@ public class Reunion{
 
                 return false;
         }
+        //metodo que crea una lista de las personas que fueron invitadas
         public boolean crearListainvitados(){
 
                 System.out.print("lista invitados: ");
@@ -126,6 +144,7 @@ public class Reunion{
                 return false;
 
         }
+        //metodo que se utiliza para agregar una nota al archivo.txt
         public String crearNota(){
 
                 String Nota="ESTOS SON LOS APUNTES DE LA REUNION";
@@ -133,6 +152,7 @@ public class Reunion{
         }
 
 
+        //metodo de inicio de la reunion
         public void ComenzarReunion()
         {
 
@@ -150,20 +170,20 @@ public class Reunion{
 
 
         }
+        //metodo que termina la reunion
         public void finalizarReunion() {
 
                 crearListaAsistentes();
                 calcularAsistencia();
                 System.out.println(calcularAsistencia());
-
                 System.out.println(calcularAsistencia2());
                 calcularAsistencia2();
-                System.out.println("se acabo la reunion:");
                 registarAusencias();
                 crearListaAusentes();
-
+                System.out.println("se acabo la reunion");
         }
 
+        //se usa toString para dar los datos de esenciales de la clase Reunion
         @Override
         public String toString() {
                 return  "Tipo: " + Tipo2 + ", Fecha: " + fechaHora + " duracion prevista: " + duracionPrevista + " organizador: " + organizador +" fomarto: " + formato2;
